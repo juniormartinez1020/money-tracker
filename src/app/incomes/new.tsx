@@ -2,23 +2,29 @@ import { Stack } from "expo-router";
 import { Button,  View } from "react-native";
 import { FormProvider, useForm } from "react-hook-form"
 import CustomTextInput from "~/components/CustomTextInput";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from 'zod'
 
+const incomeSourceSchema = z.object({
+    nameTracker: z.string().min(1, 'name track is required'),
+    exceptedAmount: z.coerce.number().min(1, 'excepted amount is required'),
+    category: z.string().min(1, 'category is required')
+})
 
+type IncomeSource = z.infer<typeof incomeSourceSchema>
 
 export default function NewIncomeScreen() {
 
-    const methods = useForm({
-        defaultValues: {
-            nameTracker: '',
-            exceptedAmount: '',
-            category: ''
-        }
+    const methods = useForm<IncomeSource>({
+        resolver: zodResolver(incomeSourceSchema)
     })
 
 
       const { control, handleSubmit } = methods 
 
-      const onSubmit = (data: any) => console.log(data)
+      const onSubmit = (data: IncomeSource) => {
+        console.log(data)
+      }
 
     
     return (

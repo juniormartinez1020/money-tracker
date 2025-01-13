@@ -18,7 +18,7 @@ export default function CustomTextInput({ label, control,
    const { 
     field: { value, onChange, onBlur }, 
     fieldState: { error } 
-} = useController({ control, name, rules: { required: 'this field is required' } })
+} = useController({ control, name })
 
    return (
        <View>
