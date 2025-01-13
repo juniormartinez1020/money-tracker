@@ -38,7 +38,7 @@ export default function NewIncomeScreen() {
             <Stack.Screen 
             options={{ 
                 title: 'New Income Source',
-                headerLargeTitle: true,
+                headerLargeTitle: false,
             }} 
             />
             <FormProvider {...methods}>
