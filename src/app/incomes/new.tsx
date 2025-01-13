@@ -5,6 +5,9 @@ import CustomTextInput from "~/components/CustomTextInput";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from 'zod'
 
+import {Picker} from '@react-native-picker/picker';
+import CustomPicker from "~/components/CustomPicker";
+
 const incomeSourceSchema = z.object({
     nameTracker: z.string().min(1, 'name track is required'),
     exceptedAmount: z.coerce.number().min(1, 'excepted amount is required'),
@@ -16,7 +19,10 @@ type IncomeSource = z.infer<typeof incomeSourceSchema>
 export default function NewIncomeScreen() {
 
     const methods = useForm<IncomeSource>({
-        resolver: zodResolver(incomeSourceSchema)
+        resolver: zodResolver(incomeSourceSchema),
+        defaultValues: {
+            category: 'Active'
+        }
     })
 
 
@@ -47,12 +53,23 @@ export default function NewIncomeScreen() {
                 placeholder="Enter amount"
                 keyboardType="numeric"
                 />
-                <CustomTextInput 
+              
+                <CustomPicker
                 control={control}
-                name="Category"
-                label="Category" 
-                placeholder="enter category" 
+                name="category"
+                label="category"
+                items={[{
+                    label: 'Active',
+                    value: 'active'
+                }, {
+                    label: 'Passive',
+                    value: 'passive'
+                }, {
+                    label: 'Portfolio',
+                    value: 'portfolio'
+                }]}
                 />
+
             </View>
                 {/* touchable button */}
                <Button 
