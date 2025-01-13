@@ -35,7 +35,12 @@ export default function NewIncomeScreen() {
     
     return (
         <View className="flex-1 bg-slate-50 p-4">
-            <Stack.Screen options={{ title: 'New Income Source'}} />
+            <Stack.Screen 
+            options={{ 
+                title: 'New Income Source',
+                headerLargeTitle: true,
+            }} 
+            />
             <FormProvider {...methods}>
             <View className="gap-4">
                   <CustomTextInput
